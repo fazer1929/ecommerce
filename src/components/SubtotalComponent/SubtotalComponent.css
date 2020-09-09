@@ -1,0 +1,12 @@
+.subtotal{
+    color:white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 300px;
+    height: 100px;
+    padding:20px;
+    background-color: rgb(2, 5, 41);
+    border: 1px solid grey;
+    border-radius: 5px;
+}
