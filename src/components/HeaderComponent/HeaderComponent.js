@@ -3,10 +3,15 @@ import styles from './HeaderComponent.module.css'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { Link } from 'react-router-dom';
 import { useStateValue } from '../../StateProvider';
+import { auth } from 'firebase';
 
 const HeaderComponent = () => {
   const [state,dispatch] = useStateValue();
-
+  const handleAuthentication=() =>{
+    if(state.user){
+      auth.signOut();
+    }
+  }
   return(
            // BEM Convention
     <div className={styles.header}>
@@ -18,12 +23,12 @@ const HeaderComponent = () => {
       className="header__searchInput" type="text" >
       </div>
       <div className={styles.header__nav}>
-        <div className="header__component">
+        <div onClick={handleAuthentication} className="header__component">
           <span className="header__optionLineOne">
             Hello Guest
           </span>
           <span className="header__optionLineTwo">
-            Sign In
+  <Link to={!state.user && "/login"}> {state.user?'Sign Out' : 'Sign In'}</Link>
           </span>
         </div>
         <div className="header__component">

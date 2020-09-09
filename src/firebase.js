@@ -1,3 +1,5 @@
+import firebase from 'firebase';
+
 var firebaseConfig = {
     apiKey: "AIzaSyDMBxmB570zoKQlikkXz2uXeoD_MyXvcPM",
     authDomain: "e-commerce-39de8.firebaseapp.com",
@@ -9,4 +11,9 @@ var firebaseConfig = {
     measurementId: "G-VCVBC7YEGX"
 };
   // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+
+  const firebaseApp =  firebase.initializeApp(firebaseConfig);
+  const db = firebaseApp.firestore();
+  const auth = firebase.auth();
+
+  export {db,auth};

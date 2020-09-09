@@ -26,7 +26,7 @@ export default function SubtotalComponent() {
             value={totalPrice}
             displayType = {"text"}
             thousandSeperator = {true}
-            perfix="$"
+            perfix={"$"}
             />
             <button>Proceed To Checkout</button>
         </div>
