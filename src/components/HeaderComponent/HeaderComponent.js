@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './HeaderComponent.module.css'
+import './HeaderComponent.css'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { Link } from 'react-router-dom';
 import { useStateValue } from '../../StateProvider';
@@ -14,23 +14,28 @@ const HeaderComponent = () => {
   }
   return(
            // BEM Convention
-    <div className={styles.header}>
-    <img
-    className="header__logo"
-    src=""
-      />
-      <div
-      className="header__searchInput" type="text" >
-      </div>
-      <div className={styles.header__nav}>
-        <div onClick={handleAuthentication} className="header__component">
-          <span className="header__optionLineOne">
-            Hello Guest
-          </span>
-          <span className="header__optionLineTwo">
-  <Link to={!state.user && "/login"}> {state.user?'Sign Out' : 'Sign In'}</Link>
-          </span>
+    <div className="header">
+      <div className="header__nav">
+      <div className="header__search">
+        <Link to="/">
+          <img
+          className="header__logo"
+          src="https://cdn.logo.com/hotlink-ok/logo-social.png"
+          />
+        </Link>  
+          <input
+          className="header__searchInput" type="text" placeholder="Search"/>
         </div>
+        <Link to={!state.user && "/login"}> 
+            <div onClick={handleAuthentication} className="header__component">
+              <span className="header__optionLineOne">
+                Hello Guest
+              </span>
+              <span className="header__optionLineTwo">
+      {state.user?'Sign Out' : 'Sign In'}
+              </span>
+            </div>
+        </Link>
         <div className="header__component">
         <span className="header__optionLineOne">
             Return
@@ -48,10 +53,11 @@ const HeaderComponent = () => {
           </span>
         </div>
 
-        <div className={styles.header__optionBasket}/>
+        <div className="header__component">
        <Link to="/checkout"><ShoppingBasketIcon/> 
-  <div className={styles.header__BasketCount}>{state.basket?.length}</div>
+  <div className="header__BasketCount">{state.basket?.length}</div>
        </Link>
+       </div>
       </div>
   </div>
     )

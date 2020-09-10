@@ -44,7 +44,7 @@ function App() {
             <CheckoutComponent/>
           </Route>
           <Route path="/">
-        <HeaderComponent/>
+          <HeaderComponent/>
             <HomeComponent/>
           </Route>
 

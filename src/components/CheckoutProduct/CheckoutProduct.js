@@ -1,7 +1,8 @@
 import React from 'react'
 import './CheckoutProduct.css'
 import { useStateValue } from '../../StateProvider'
-export default function CheckoutProduct({id,image,title,price,rating}) {
+import FlipMove from 'react-flip-move'
+export default function CheckoutProduct({id,imgs,title,price,rating}) {
     const [{basket},dispatch] = useStateValue();
 
 
@@ -11,11 +12,11 @@ export default function CheckoutProduct({id,image,title,price,rating}) {
             id:id,
         })
 }
-
     return (
-        <div>
+     
             <div className="checkoutProduct">
-                <img className="checkoutProduct__image" src={image}/>
+                {console.log(id,imgs,title,price,rating)}
+                <img className="checkoutProduct__image" src={imgs}/>
 
                 <div className="checkoutProduct__info">
                     <p className="checkoutProduct__title">{title}</p>
@@ -29,6 +30,6 @@ export default function CheckoutProduct({id,image,title,price,rating}) {
                     <button onClick={removeFromBasket}> Remove</button>
                 </div>
             </div>
-        </div>
+       
     )
 }

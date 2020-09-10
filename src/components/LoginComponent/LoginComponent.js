@@ -11,7 +11,7 @@ function LoginComponent() {
     const signIn= (e) =>{
         e.preventDefault();
         //Login
-        auth.
+        auth().
             signInWithEmailAndPassword(email,password)
             .then(user =>{
                 history.push("/")
@@ -24,7 +24,7 @@ function LoginComponent() {
     const signUp= (e) =>{
         e.preventDefault();
         //Register
-        auth
+        auth()
         .createUserWithEmailAndPassword(email,password)
         .then((user) => {//user === auth
             console.log(user)

@@ -2,14 +2,14 @@ import React from 'react'
 import './ProductComponent.css'
 import { useStateValue } from '../../StateProvider'
 
-export default function ProductComponent({title,rating,imgs,price}) {
+export default function ProductComponent({id,title,rating,imgs,price}) {
     const [{basket},dispatch] = useStateValue();
 
     const addToBasket =() =>{
     dispatch({
         type:"ADD_TO_BASKET",
         item:{
-            id:1,
+            id:id,
             title:title,
             image:imgs,
             price:price,

@@ -10,12 +10,14 @@ const HomeComponent = () =>{
 
             <div className="home__row">
             <ProductComponent
+            id={1}
             title="Harry Poter and Chamber of Secrets"
             rating={5}
             imgs="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1499277281l/5.jpg"
             price={5.00}
             />
             <ProductComponent
+            id={2}
             title="Harry Poter and Goblet of Fire"
             rating={4}
             imgs="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1499277281l/5.jpg"
@@ -24,18 +26,21 @@ const HomeComponent = () =>{
             </div>
             <div className="home__row">
             <ProductComponent
+            id={3}
             title="The Hitchhikers guide to galaxy"
             rating={3}
             imgs="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1499277281l/5.jpg"
             price={6.70}
             />
             <ProductComponent
+            id={1}
             title="Harry Poter and Chamber of Secrets"
             rating={5}
-            imgs=""
+            imgs="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1499277281l/5.jpg"
             price={5.00}
             />
             <ProductComponent
+            id={3}
             title="Harry Poter and Chamber of Secrets"
             rating={5}
             imgs="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1499277281l/5.jpg"
@@ -43,7 +48,13 @@ const HomeComponent = () =>{
             />
             </div>
             <div className="home__row">
-            <ProductComponent/>
+            <ProductComponent
+             id={3}
+             title="Harry Poter and Chamber of Secrets"
+             rating={5}
+             imgs="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1499277281l/5.jpg"
+             price={5.00}
+             />
 
             </div>
 

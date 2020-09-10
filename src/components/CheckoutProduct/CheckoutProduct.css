@@ -1,8 +1,11 @@
 .checkoutProduct{
     display: flex;
     margin-top:20px;
-    margin-bottom:20pc;
+    margin-bottom:40px;
+    padding:15px;
+    border-bottom: 3px solid rgba(0,0,0,0.5);
 }
+
 .checkoutProduct__info{
     padding-left:20px;
 }
