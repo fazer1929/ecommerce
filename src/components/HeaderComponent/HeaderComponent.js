@@ -9,7 +9,7 @@ const HeaderComponent = () => {
   const [state,dispatch] = useStateValue();
   const handleAuthentication=() =>{
     if(state.user){
-      auth.signOut();
+      auth().signOut();
     }
   }
   return(
@@ -29,21 +29,23 @@ const HeaderComponent = () => {
         <Link to={!state.user && "/login"}> 
             <div onClick={handleAuthentication} className="header__component">
               <span className="header__optionLineOne">
-                Hello Guest
+              Hello {state.user?state.user.email:"Guest"}
               </span>
               <span className="header__optionLineTwo">
       {state.user?'Sign Out' : 'Sign In'}
               </span>
             </div>
         </Link>
-        <div className="header__component">
-        <span className="header__optionLineOne">
-            Return
-          </span>
-          <span className="header__optionLineTwo">
-            Order
-          </span>
-        </div>
+        <Link to="/orders">
+          <div className="header__component">
+          <span className="header__optionLineOne">
+              Return
+            </span>
+            <span className="header__optionLineTwo">
+              Order
+            </span>
+          </div>
+        </Link>
         <div className="header__component">
         <span className="header__optionLineOne">
             Run

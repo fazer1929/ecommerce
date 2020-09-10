@@ -4,10 +4,17 @@ import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 import HomeComponent from './components/HomeComponent/HomeComponent'
 import CheckoutComponent from './components/CheckoutComponent/CheckoutComponent'
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
+import CheckoutPayment from './components/CheckoutPayment/CheckoutPayment';
 import LoginComponent from './components/LoginComponent/LoginComponent';
 import { auth } from './firebase';
 import { useStateValue } from './StateProvider';
+import {loadStripe} from '@stripe/stripe-js'
+import {Elements} from '@stripe/react-stripe-js'
+import Orders from './Orders/Orders';
 
+const promise = loadStripe(
+  "pk_test_51HPvTlAjOMRbAmPkJYurzpFfln91kYehReicDEkCDvKBmbANDmaZHDPK4Nz64F8MPCV9cxf9zXoFhOPGJ41IGqDu00yAw7oziK"
+);
 
 function App() {
   const [state,dispatch] = useStateValue();
@@ -39,15 +46,29 @@ function App() {
         <Route path="/login" >
           <LoginComponent/>
         </Route>
-          <Route path="/checkout" >
+       
+        <Route path="/payment" >
+        <HeaderComponent/>
+        <Elements stripe={promise}>
+          <CheckoutPayment/>
+        </Elements>
+        </Route>
+       
+       <Route path="/checkout" >
           <HeaderComponent/>
             <CheckoutComponent/>
-          </Route>
-          <Route path="/">
+       </Route>
+
+       <Route path="/orders">
+          <HeaderComponent/>
+            <Orders/>
+       </Route>
+
+      <Route path="/">
           <HeaderComponent/>
             <HomeComponent/>
-          </Route>
-
+       </Route>
+    
         </Switch>
       </React.Fragment>
     </Router>

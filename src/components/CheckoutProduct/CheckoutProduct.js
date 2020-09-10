@@ -2,7 +2,7 @@ import React from 'react'
 import './CheckoutProduct.css'
 import { useStateValue } from '../../StateProvider'
 import FlipMove from 'react-flip-move'
-export default function CheckoutProduct({id,imgs,title,price,rating}) {
+export default function CheckoutProduct({id,imgs,title,price,rating,hideButton}) {
     const [{basket},dispatch] = useStateValue();
 
 
@@ -27,8 +27,10 @@ export default function CheckoutProduct({id,imgs,title,price,rating}) {
                     <div className="checkoutProduct__rating">
                         {Array(rating).fill().map((_,i)=><p>⭐</p>)}
                     </div>
-                    <button onClick={removeFromBasket}> Remove</button>
-                </div>
+                    {!hideButton && 
+                        <button onClick={removeFromBasket}> Remove</button>
+                    }
+                 </div>
             </div>
        
     )
