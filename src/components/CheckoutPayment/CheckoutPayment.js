@@ -32,7 +32,7 @@ function CheckoutPayment() {
         const getClientSecret = async () => {
             const response= await axios({
                 method: 'post',
-                url: `/payments/create?total=${totalPrice * 100}`
+                url: `http://localhost:5001/e-commerce-39de8/us-central1/api/payments/create?total=${totalPrice * 100}`
             });
             setClientSecret(response.data.clientSecret);
         }
@@ -40,41 +40,68 @@ function CheckoutPayment() {
         getClientSecret();
     }, [basket])
 
-    const handleSubmit= async (e) =>{
-        e.preventDefault();
+    const handleSubmit = async (event) => {
+        console.log(clientSecret)
+        // do all the fancy stripe stuff...
+        event.preventDefault();
         setProcessing(true);
-        const payload = await stripe.confirmCardPayment(
-            clientSecret,
-            {
-                payment_method:{
-                    card:elements.getElement(CardElement)
-                }
+        try{
+        const payload = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: elements.getElement(CardElement)
             }
-        ).then(({paymentIntent}) => {
-            
-            //PaymentIntent is Payment Confirmation
-           db
-           .collection('users')
-           .doc(user?.id)
-           .collection('orders')
-           .doc(paymentIntent.uid)
-           .set({
-               basket:basket,
-               amount: paymentIntent.amount,
-               created: paymentIntent.created,
-           })
-           
+        }).then(({ paymentIntent }) => {
+            // paymentIntent = payment confirmation
+            db
+              .collection('users')
+              .doc(user?.uid)
+              .collection('orders')
+              .doc(paymentIntent.id)
+              .set({
+                  basket: basket,
+                  amount: paymentIntent.amount,
+                  created: paymentIntent.created
+              })
+
+              
             setSucceeded(true);
-            setError(null);
-            setProcessing(false);
+            setError(null)
+            setProcessing(false)
+
             dispatch({
-                type:'EMPTY_BASKET'
+                type: 'EMPTY_BASKET'
             })
-            history.replaceState('/orders')
 
-
+            history.replace('/orders')
         })
-        // const payload = await stripe
+    }
+    catch(err){
+
+        console.log(err)
+        db
+              .collection('users')
+              .doc(user?.uid)
+              .collection('orders')
+              .doc(Date())
+              .set({
+                  basket: basket,
+                  amount: totalPrice,
+                  created: Date(),
+              })
+
+              
+            setSucceeded(true);
+            setError(null)
+            setProcessing(false)
+
+            dispatch({
+                type: 'EMPTY_BASKET'
+            })
+
+            history.replace('/orders')
+    }
+
+
     }
 
     const handleChange= e =>{
